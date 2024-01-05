@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        int m=n/2;
+        int cand;
+        for(int i=0;i<n;i++){
+            int c=0;
+            cand=nums[i];
+            for(int j=0;j<n;j++){
+                if(cand==nums[j]){
+                    c++;
+                }
+            }
+            if(c>m){
+                return cand;
+            }
+        }
+    return -1;}
+};
+
+/*每次外层循环时都会重置计数器，并且仅在确定一个元素的计数超过数组长度一半时才返回该元素。
+这保证了逻辑上的正确性。然而，它的时间复杂度是O(n2)对于大型数组来说可能不够高效。
+如果需要处理大型数据集，建议使用Boyer-Moore 投票算法。*/
