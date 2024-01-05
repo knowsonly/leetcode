@@ -22,3 +22,31 @@ public:
 /*每次外层循环时都会重置计数器，并且仅在确定一个元素的计数超过数组长度一半时才返回该元素。
 这保证了逻辑上的正确性。然而，它的时间复杂度是O(n2)对于大型数组来说可能不够高效。
 如果需要处理大型数据集，建议使用Boyer-Moore 投票算法。*/
+
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count = 0; // 初始化计数器
+        int candidate = 0; // 初始化候选元素
+
+        // 遍历数组
+        for (int i = 0; i < nums.size(); i++) {
+            if (count == 0) {
+                // 当计数器为零时，更换候选元素
+                candidate = nums[i];
+            }
+            if (nums[i] == candidate) {
+                // 如果当前元素等于候选元素，计数器增加
+                count++;
+            } else {
+                // 如果不等于，计数器减少
+                count--;
+            }
+        }
+
+        // 返回多数元素
+        return candidate;
+    }
+};
