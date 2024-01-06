@@ -1,0 +1,48 @@
+//方法1
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        int arr[n];
+        int j=0;
+        for(int i=0;i<n;i++){
+            if(i<n-k){
+                arr[i+k]=nums[i];
+            }
+            else{
+                arr[j]=nums[i];
+                j++;
+            }
+        }
+        for(int i=0;i<n;i++){
+            nums[i]=arr[i];
+        }
+    }
+};
+
+//方法2
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        int arr[n];
+        for(int i=0;i<n;i++){
+            if(i<n-k){
+                arr[i+k]=nums[i];
+            }
+            else{
+                arr[i+k-n]=nums[i];
+            }
+        }
+        for(int i=0;i<n;i++){
+            nums[i]=arr[i];
+        }
+    }
+};
+/*可以在不新建另一个数组的情况下实现数组的旋转。一种有效的方法是使用“反转”操作。此方法包括三个步骤：
+反转整个数组。
+反转数组的前 k 个元素。
+反转数组剩余的 n-k 个元素。
+这种方法的优点是不需要额外的数组空间，其操作直接在原数组上进行。
+*/
+
