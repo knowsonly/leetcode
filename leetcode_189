@@ -46,3 +46,28 @@ public:
 这种方法的优点是不需要额外的数组空间，其操作直接在原数组上进行。
 */
 
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        for(int i=0;i<n/2;i++){
+            int j = n - 1 - i;
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+        }
+        for(int i=0;i<k/2;i++){
+            int j = k-1-i;
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+        }
+        for(int i=0;i<(n-k)/2;i++){
+            int j = n-1-i;
+            int temp=nums[i + k];
+            nums[i + k]=nums[j];
+            nums[j]=temp;
+        }
+    }
+};
+
