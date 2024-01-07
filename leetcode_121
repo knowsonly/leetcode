@@ -33,3 +33,25 @@ public:
 
 /*计算所有可能的买卖组合：您的代码计算了所有可能的买卖组合并存储在数组 arr 中，这在理论上是可行的，但效率不高。对于大型数组，这种方法的时间和空间复杂度都会非常高。
 使用插入排序：插入排序在最坏情况下的时间复杂度为 O(n²)，这对于大型数组来说效率不高。*/
+
+
+/* 初始化变量：
+
+minPrice：迄今为止的最低股票价格。初始值设置为数组的第一个元素。
+maxProfit：迄今为止的最大利润。初始值设置为 0。
+遍历股票价格数组：
+对于数组中的每一个价格（从第二个元素开始）：
+更新最低价格：将当前价格与迄今为止的最低价格进行比较，如果当前价格更低，则更新 minPrice。
+计算并更新最大利润：计算当前价格与 minPrice 的差值（即当前卖出的潜在利润），如果这个差值大于迄今为止的 maxProfit，则更新 maxProfit。*/
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+    if (prices.empty()) return 0;
+        int minPrice = prices[0];
+        int maxProfit = 0;
+        for (int i = 1; i < prices.size(); i++) {
+            minPrice = min(minPrice, prices[i]);
+            maxProfit = max(maxProfit, prices[i] - minPrice);
+        }
+        return maxProfit;}
+};
