@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+    int n=prices.size();
+    int m=n*(n-1)/2;
+    int arr[m];
+    int k=0;
+    int p=0;
+    for(int i=0;i<n-1;i++){
+        for(int j=i+1;j<n;j++){
+            arr[k]=(prices[j]-prices[i]);
+            k++;
+        }
+    }
+    for (int i = 1; i < m; i++) {
+        int key = arr[i];    // 把当前要排序的元素存储在key中
+        int j = i - 1;
+
+        /* 将那些比key大的元素向右移动一个位置 */
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key; // 把key放到它正确的位置上
+    }
+    if(arr[m-1]>=0){
+        return arr[m-1];
+    }else{
+        return p;
+    };}
+};
+
+
+/*计算所有可能的买卖组合：您的代码计算了所有可能的买卖组合并存储在数组 arr 中，这在理论上是可行的，但效率不高。对于大型数组，这种方法的时间和空间复杂度都会非常高。
+使用插入排序：插入排序在最坏情况下的时间复杂度为 O(n²)，这对于大型数组来说效率不高。*/
