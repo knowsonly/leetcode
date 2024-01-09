@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int n=nums.size();
+        int boolean=0;
+        if (nums[0]==0){
+            boolean =false;
+        }else{
+            for(int i=1;i<n;i++){
+                if(nums[i]==0){
+                    for(int j=0;j<i;){
+                        if(nums[j]>=i){
+                            boolean=1;
+                        }else{
+                            j++;
+                        }
+                }
+                }    
+            }
+        }
+    return boolean;}
+};
+
+/*这个程序的最坏情况下的时间复杂度为 O(n^2)。存在一种时间复杂度为 O(n) 的解决方案来解决这个“跳跃游戏”问题。这种方法侧重于一遍遍历数组，并在遍历的同时更新能够到达的最远距离。以下是实现该算法的步骤：
+初始化变量：初始化一个变量 maxReach，用来存储目前能够到达的最远距离。最初，maxReach 设为数组的第一个元素，表示从位置0开始最远能够到达的位置。
+遍历数组：遍历数组中的每个元素。对于每个位置 i，检查 maxReach 是否大于或等于 i，这表示 i 是可达的。如果不是，则返回 false，因为这意味着不能越过当前的间隙。
+更新最远距离：在遍历的过程中，更新 maxReach。对于每个位置 i，maxReach 应该是 max(maxReach, i + nums[i])，这表示从当前位置或之前的位置能够到达的最远距离。
+检查是否可达末尾：如果在任何时候 maxReach 至少与数组的最后一个位置一样远，那么返回 true，表示可以到达数组的末尾。
+这种方法的时间复杂度是 O(n)，因为它只遍历数组一次。空间复杂度是 O(1)，因为只使用了常数个额外空间。*/
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int maxReach = nums[0];
+        for(int i = 1; i < nums.size(); i++) {
+            if (maxReach < i) return false; // 当前位置不可达
+            maxReach = max(maxReach, i + nums[i]);
+            if (maxReach >= nums.size() - 1) return true; // 已经可以到达末尾
+        }
+        return maxReach >= nums.size() - 1;
+    }
+};
