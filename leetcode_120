@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int n=triangle.size();
+        int arr[n];
+        arr[0]=triangle[0][0];
+        for(int i=1;i<n;i++){
+            int mindp=triangle[i][0];
+            for(int j=1;j<i+1;j++){
+                mindp=min(mindp,triangle[i][j]);
+            }
+            arr[i]=mindp;
+        }
+        int mindpp=0;
+        for(int i=0;i<n;i++){
+            mindpp=mindpp+arr[i];
+        }
+    return mindpp;}
+};
+只是考虑了每层的最小值，并未考虑相邻元素。可用动态规范解决。
